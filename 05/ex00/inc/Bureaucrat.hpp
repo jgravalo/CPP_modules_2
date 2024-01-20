@@ -21,15 +21,21 @@ public:
     void        gradePromotion();
     void        gradeDemotion();
 	void		check();
-	class GradeTooHighException : std::exception
+
+	/* class exception : std::exception
 	{
 		public:
 			virtual const char*	what() const throw();
+	}; */
+	class GradeTooHighException : std::out_of_range
+	{
+		public:
+			GradeTooHighException();
 	};
-	class GradeTooLowException : std::exception
+	class GradeTooLowException : std::out_of_range
 	{
 		public:
-			virtual const char*	what() const throw();
+			GradeTooLowException();
 	};
 };
 

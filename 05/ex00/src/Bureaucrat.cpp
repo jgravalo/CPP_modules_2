@@ -66,15 +66,9 @@ void		Bureaucrat::check()
 		GradeTooHighException();
 }
 
-const char*	Bureaucrat::GradeTooHighException::what()
-{
-	return("Grade too high");
-}
+Bureaucrat::GradeTooHighException::GradeTooHighException() : std::out_of_range("grade too high") {}
 
-const char*	Bureaucrat::GradeTooLowException::what()
-{
-	return("Grade too low");
-}
+Bureaucrat::GradeTooLowException::GradeTooLowException() : std::out_of_range("grade too low") {}
 
 std::ostream&   operator<<(std::ostream& out, class Bureaucrat& Copy)
 {
