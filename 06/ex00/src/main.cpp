@@ -16,7 +16,7 @@ int main(int argc, char **argv)
 	//std::cout << typeid(f).name() << std::endl;
 	//std::cout << std::setprecision(15);
 	//std::cout << f << std::endl;
-	std::cout << str.find('+') << std::endl;
+	//std::cout << str.find('+') << std::endl;
 	ScalarConverter::convert(str);
 /* 	int n = str.find('.');
 	int len = str.length();
