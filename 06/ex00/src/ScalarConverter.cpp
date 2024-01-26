@@ -205,19 +205,19 @@ void	ScalarConverter::convert(std::string str)
 	char c = recognize(str);
 	std::cout << "c is a " << recognize(str) << std::endl;
 
-	std::cout << "char: " << "<";
+	std::cout << "char: ";
 	c_convert(str, c);
-	std::cout << ">" << std::endl;
+	std::cout << std::endl;
 
-	std::cout << "int: " << "<";
+	std::cout << "int: ";
 	i_convert(str, c);
-	std::cout << ">" << std::endl;
+	std::cout << std::endl;
 
-	std::cout << "float: " << "<";
+	std::cout << "float: ";
 	df_convert(str, c, 'f');
-	std::cout << ">" << std::endl;
+	std::cout << std::endl;
 
-	std::cout << "double: " << "<";
+	std::cout << "double: ";
 	df_convert(str, c, 'd');
-	std::cout << ">" << std::endl;
+	std::cout << std::endl;
 }
