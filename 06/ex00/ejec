@@ -1,0 +1,1 @@
+c++ -Wall -Werror -Wextra src/main.cpp -o ScalarConverter && ./ScalarConverter

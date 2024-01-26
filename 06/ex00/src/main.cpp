@@ -1,4 +1,5 @@
 #include<ScalarConverter.hpp>
+//#include<iostream>
 
 int main(int argc, char **argv)
 {
@@ -9,9 +10,13 @@ int main(int argc, char **argv)
 
 	//char c = 'i';
 	//int n = 5;
-	//float f = 0.5;
-	//double d = 0.5;
-	//std::cout << typeid(34.42e3f).name() << std::endl;
+	//float f = 3.40282349e+38F;
+	//double f = 1.79769313486231571e+308;
+	//double f = 2.2507385850720138e+308;
+	//std::cout << typeid(f).name() << std::endl;
+	//std::cout << std::setprecision(15);
+	//std::cout << f << std::endl;
+	std::cout << str.find('+') << std::endl;
 	ScalarConverter::convert(str);
 /* 	int n = str.find('.');
 	int len = str.length();

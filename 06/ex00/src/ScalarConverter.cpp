@@ -19,43 +19,76 @@ ScalarConverter::~ScalarConverter()
 {
 }
 
-void	ScalarConverter::c_convert(std::string str)
+void	ScalarConverter::c_convert(std::string str, char type)
 {
-	char n = atoi(str.c_str());
+	char c = 0;
+	if (type == 'i')
+		c = atoi(str.c_str());
+	else if (type == 'c')
+		c = str[0];
+	else if (type == 'f' || type == 'd')
+	{
+		std::cout << "impossible";
+		return ;
+	}
+	if (c < 32 || c > 126)
+	{
+		std::cout << "non printable";
+		return ;
+	}
+	std::cout << c;
+}
+
+void	ScalarConverter::i_convert(std::string str, char type)
+{
+	int n = 0;
+	if (type == 'i')
+		n = atoi(str.c_str());
+	else if (type == 'f' || type == 'd')
+	{
+		int len = str.find('.');
+		n = atol(str.substr(0, len).c_str());
+	}
+	else if (type == 'c')
+		n = atol(str.c_str());
 	std::cout << n;// << std::endl;
 }
 
-void	ScalarConverter::i_convert(std::string str)
+void	ScalarConverter::df_convert(std::string str, char type, char target)
 {
-	int n = atoi(str.c_str());
-	std::cout << n;// << std::endl;
-}
+	(void)type;
+	unsigned long prec = 0;
+	if (target == 'f')
+		prec = 7;
+	else if (target == 'd')
+		prec = 15;
 
-void	ScalarConverter::f_convert(std::string str)
-{
-	int n = str.find('.');
-	//	std::cout << n << " ";
-	std::string snum = str.substr(0, n);
+	int p = str.find('.');
+	std::string snum = str.substr(0, p);
 	long num = atol(snum.c_str());
-	n++;
+
+	p++;
 	int len = str.length();
-	std::string	sdec = str.substr(n, len - n);
+	std::string	sdec = str.substr(p, len - p);
 	float dec = 0;
-	if (n > 0)
+
+	if (p > 0)
 		dec = atol(sdec.c_str());		
-	std::cout << num << " + " << dec << " = ";
+	//std::cout << num << " + " << dec << " = ";
 	float res = num + dec / pow(10, sdec.length());
-	if (sdec.length() > 7)
-		std::cout << std::setprecision(7);
+	if (sdec.length() > prec)
+		std::cout << std::setprecision(prec);
 	else
 		std::cout << std::setprecision(sdec.length() + 1);
 	std::cout << res;// << std::endl;
+
+
 	//std::cout << ".0";// << std::endl;
 	//std::cout << "f";// << std::endl;
 	//return (res);
 }
-
-void	ScalarConverter::d_convert(std::string str)
+/*
+void	ScalarConverter::d_convert(std::string str, char type)
 {
 	int n = str.find('.');
 	std::string snum = str.substr(0, n);
@@ -76,63 +109,85 @@ void	ScalarConverter::d_convert(std::string str)
 	std::cout << res;// << std::endl;
 	//std::cout << ".0";// << std::endl;
 	//return (res);
+}*/
+
+char	ScalarConverter::isnum(std::string str)
+{
+	int i = 0;
+	char c = 0;
+	
+	if (!(str[i] >= '0' && str[i]<= '9'))
+		return 0;
+	while (str[i] >= '0' && str[i]<= '9')
+		i++;
+	if (!str[i])
+		return ('i');
+	else if (str[i] != '.')
+		return 0;
+	i++;
+	if (!(str[i] >= '0' && str[i]<= '9'))
+		return 0;
+	while (str[i] >= '0' && str[i]<= '9')
+		i++;
+	if (!str[i])
+		return ('d');
+	if (str[i] == 'e')
+	{
+		i++;
+		if (str[i] == '+' && str[i] == '-')
+			i++;
+		if (!(str[i] >= '0' && str[i]<= '9'))
+			return 0;
+		while (str[i] >= '0' && str[i]<= '9')
+			i++;
+	}
+	if (!str[i])
+		return ('d');
+	else if (str[i] == 'f' && !str[i + 1])
+		return ('f');
+	return (c);
+}
+
+char	ScalarConverter::ischr(std::string str)
+{
+	int len = str.length();
+	if (len == 1)
+		return ('c');
+	if (len > 1)
+		return ('s');
+	return (0);
 }
 
 char	ScalarConverter::recognize(std::string str)
 {
-	char c = 0;
-	for (size_t i = 0; i < str.length() ; i++)
-	{
-		if (str[i] >= '0' && str[i]<= '9')
-		{
-			for (size_t i = 0; str[i] >= '0' && str[i]<= '9'; i++)
-			{
-				/* code */
-			}
-		}
-		else
-		{
-			
-		}
-	}
-	return (c);
+	char c;
+	c = isnum(str);
+	if (c)
+		return (c);
+	c = ischr(str);
+	if (c)
+		return (c);
+	return (0);
 }
 
 void	ScalarConverter::convert(std::string str)
 {
-	std::cout << str << std::endl;
+	char c = recognize(str);
+	std::cout << "c is a " << recognize(str) << std::endl;
 
-	/*std::cout << "char: " << "<";
-	c_convert(str);
+	std::cout << "char: " << "<";
+	c_convert(str, c);
 	std::cout << ">" << std::endl;
-	
+
 	std::cout << "int: " << "<";
-	i_convert(str);
+	i_convert(str, c);
 	std::cout << ">" << std::endl;
-
+/*
 	std::cout << "float: " << "<";
-	f_convert(str);
+	df_convert(str, c, 'd');
 	std::cout << ">" << std::endl;
 
 	std::cout << "double: " << "<";
-	d_convert(str);
+	df_convert(str, c, 'f');
 	std::cout << ">" << std::endl; */
 }
-/* 
-char	ScalarConverter::c_convert(std::string str)
-{
-	char c = atoi(str.c_str());
-	if (n < 32 || n >= 127)
-	{
-		std::cout << "non printable";
-		return (0);
-	}
-	std::cout << c << std::endl;
-	return (c);
-}
-
-int		ScalarConverter::i_convert(int n)
-{
-	int n;
-	return (n);
-} */
