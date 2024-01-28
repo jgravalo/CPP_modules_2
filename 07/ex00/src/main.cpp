@@ -1,4 +1,4 @@
-#include<Template.hpp>
+#include<whatever.hpp>
 
 void testInt()
 {
