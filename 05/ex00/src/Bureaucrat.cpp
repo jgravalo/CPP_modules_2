@@ -7,7 +7,7 @@ Bureaucrat::Bureaucrat() : name("confidential")
 
 Bureaucrat::Bureaucrat(std::string _name, int _grade) : name(_name)
 {
-    grade = _grade;
+    setGrade(_grade);
 	check();
 }
 
@@ -66,9 +66,15 @@ void		Bureaucrat::check()
 		GradeTooHighException();
 }
 
-Bureaucrat::GradeTooHighException::GradeTooHighException() : std::out_of_range("grade too high") {}
+Bureaucrat::GradeTooHighException::GradeTooHighException()
+{
+	throw std::out_of_range("grade too high");
+}
 
-Bureaucrat::GradeTooLowException::GradeTooLowException() : std::out_of_range("grade too low") {}
+Bureaucrat::GradeTooLowException::GradeTooLowException()
+{
+	throw std::out_of_range("grade too low");
+}
 
 std::ostream&   operator<<(std::ostream& out, class Bureaucrat& Copy)
 {

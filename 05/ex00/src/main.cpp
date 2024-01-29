@@ -6,17 +6,14 @@ int main()
 //	/*
 	try
 	{
+		//Bureaucrat  Bureaucrat("perro", 151);
 		Bureaucrat  Bureaucrat;
 		std::cout << Bureaucrat << std::endl;
 		Bureaucrat.gradeDemotion();
-		if(Bureaucrat.getGrade() > 150)
-			throw (Bureaucrat::GradeTooLowException());
-		std::cout << Bureaucrat << std::endl;
+		//Bureaucrat.check();
 	}
-	catch(const std::out_of_range& e)
-	//catch(const char *e)
+	catch (const std::exception& e)
 	{
-		//std::cerr << e << std::endl;
 		std::cerr << e.what() << std::endl;
 	}
 //	 */

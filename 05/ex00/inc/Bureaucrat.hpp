@@ -16,23 +16,16 @@ public:
     ~Bureaucrat();
     std::string getName();
     int         getGrade();
-    //void        setName(std::string _name);
     void        setGrade(int _grade);
     void        gradePromotion();
     void        gradeDemotion();
 	void		check();
-
-	/* class exception : std::exception
-	{
-		public:
-			virtual const char*	what() const throw();
-	}; */
-	class GradeTooHighException : std::out_of_range
+	class		GradeTooHighException
 	{
 		public:
 			GradeTooHighException();
 	};
-	class GradeTooLowException : std::out_of_range
+	class		GradeTooLowException
 	{
 		public:
 			GradeTooLowException();
