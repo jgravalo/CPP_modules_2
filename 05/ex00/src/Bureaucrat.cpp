@@ -78,6 +78,6 @@ Bureaucrat::GradeTooLowException::GradeTooLowException()
 
 std::ostream&   operator<<(std::ostream& out, class Bureaucrat& Copy)
 {
-    std::cout << Copy.getName() << ", bureaucrat grade " << Copy.getGrade() << std::endl;
+    std::cout << Copy.getName() << ", bureaucrat grade " << Copy.getGrade();
     return (out);
 }
