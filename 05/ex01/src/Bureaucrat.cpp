@@ -78,11 +78,20 @@ Bureaucrat::GradeTooLowException::GradeTooLowException()
 
 void	Bureaucrat::signForm(Form& F)
 {
-	F.
+	try
+	{
+		F.beSigned(*this);
+		std::cout << name << " signed " << F.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << name << " couldn\'t sign " << F.getName() << " because ";
+		std::cerr << e.what() << '\n';
+	}
 }
 
 std::ostream&   operator<<(std::ostream& out, class Bureaucrat& Copy)
 {
-    std::cout << Copy.getName() << ", bureaucrat grade " << Copy.getGrade();
+    out << Copy.getName() << ", bureaucrat grade " << Copy.getGrade();
     return (out);
 }
