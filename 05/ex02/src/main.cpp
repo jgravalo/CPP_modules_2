@@ -1,13 +1,13 @@
 #include<Bureaucrat.hpp>
 #include<All.h>
 
+/*
 void	testDefault()
 {
 	std::cout << "\ndefault:" << std::endl;
 	try
 	{
 		Bureaucrat  Bureaucrat;
-		AForm		AForm;
 
 		std::cout << Bureaucrat << std::endl;
 		Bureaucrat.gradeDemotion();
@@ -147,34 +147,142 @@ void	testWorngAForms()
 		std::cerr << e.what() << std::endl;
 	}
 }
-
-void	testShrubberyCreationForm()
+ */
+void	testShrubberyCreationFormKO()
 {
 	try
 	{
 		ShrubberyCreationForm	A;
 		Bureaucrat				one;
 
-		std::cout << "\nShrubberyCreationForm:" << std::endl;
+		std::cout << "\nShrubberyCreationForm KO:" << std::endl;
 		std::cout << one << std::endl;
 		std::cout << A << std::endl;
+		one.signForm(A);
+		one.executeForm(A);
+		std::cout << "finish" << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what() << std::endl;
 	}
-	
+}
+
+void	testShrubberyCreationFormOK()
+{
+	try
+	{
+		ShrubberyCreationForm	A;
+		Bureaucrat				one("perro sanchez", 130);
+
+		std::cout << "\nShrubberyCreationForm OK:" << std::endl;
+		std::cout << one << std::endl;
+		std::cout << A << std::endl;
+		one.signForm(A);
+		one.executeForm(A);
+		std::cout << "finish" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void	testRobotomyRequestFormKO()
+{
+	try
+	{
+		RobotomyRequestForm	A;
+		Bureaucrat				one;
+
+		std::cout << "\nRobotomyRequestForm KO:" << std::endl;
+		std::cout << one << std::endl;
+		std::cout << A << std::endl;
+		one.signForm(A);
+		one.executeForm(A);
+		std::cout << "finish" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void	testRobotomyRequestFormOK()
+{
+	try
+	{
+		RobotomyRequestForm	A;
+		Bureaucrat				one("perro sanchez", 40);
+
+		std::cout << "\nRobotomyRequestForm OK:" << std::endl;
+		std::cout << one << std::endl;
+		std::cout << A << std::endl;
+		one.signForm(A);
+		one.executeForm(A);
+		std::cout << "finish" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void	testPresidentialPardonFormKO()
+{
+	try
+	{
+		PresidentialPardonForm	A;
+		Bureaucrat				one;
+
+		std::cout << "\nPresidentialPardonForm KO:" << std::endl;
+		std::cout << one << std::endl;
+		std::cout << A << std::endl;
+		one.signForm(A);
+		one.executeForm(A);
+		std::cout << "finish" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void	testPresidentialPardonFormOK()
+{
+	try
+	{
+		PresidentialPardonForm	A;
+		Bureaucrat				one("perro sanchez", 3);
+
+		std::cout << "\nPresidentialPardonForm OK:" << std::endl;
+		std::cout << one << std::endl;
+		std::cout << A << std::endl;
+		one.signForm(A);
+		one.executeForm(A);
+		std::cout << "finish" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 }
 
 int main()
 {
+	/*
 	testDefault();
 	testArgs();
 	testCopy();
 	testExecuteOK();
 	testExecuteLow();
 	testExecuteNotSigned();
-	testWorngAForms();
-	testShrubberyCreationForm();
+	testWorngAForms(); */
+	testShrubberyCreationFormKO();
+	testShrubberyCreationFormOK();
+	testRobotomyRequestFormKO();
+	testRobotomyRequestFormOK();
+	testPresidentialPardonFormKO();
+	testPresidentialPardonFormOK();
 	return 0;
 }

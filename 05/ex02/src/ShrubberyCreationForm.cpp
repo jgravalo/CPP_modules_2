@@ -1,18 +1,24 @@
 #include<All.h>
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("confidential", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Confidential Shrubbery Creation Form", 145, 137)
 {
+	target = "confidential";
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(std::string _target) : AForm(_target + " Shrubbery Creation Form", 145, 137)
+{
+	target = _target;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(class ShrubberyCreationForm& Copy) :
 		AForm(Copy.getName(), Copy.getGradetoSign(), Copy.getGradetoExecute())
 {
-	(void)Copy;
+	target = Copy.getTarget();
 }
 
 ShrubberyCreationForm&	ShrubberyCreationForm::operator=(class ShrubberyCreationForm& Copy)
 {
-	(void)Copy;
+	target = Copy.getTarget();
 	return (*this);
 }
 
@@ -20,9 +26,12 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 }
 
-/*
-void		AForm::function() const
+void		ShrubberyCreationForm::function() const
 {
-	std::cout << "adios" << std::endl;
+	std::cout << "ShrubberyCreationForm function" << std::endl;
 }
-*/
+
+std::string	ShrubberyCreationForm::getTarget()
+{
+	return (target);
+}
