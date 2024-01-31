@@ -1,8 +1,8 @@
 #include<All.h>
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm("Confidential  Presidential Pardon Form", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm() : AForm("Confidential Presidential Pardon Form", 25, 5)
 {
-	target = "confidential";
+	target = "Confidential";
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string _target) : AForm(_target + " Presidential Pardon Form", 25, 5)
@@ -28,7 +28,7 @@ PresidentialPardonForm::~PresidentialPardonForm()
 
 void		PresidentialPardonForm::function() const
 {
-	std::cout << "PresidentialPardonForm function" << std::endl;
+	std::cout << target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 
 std::string	PresidentialPardonForm::getTarget()

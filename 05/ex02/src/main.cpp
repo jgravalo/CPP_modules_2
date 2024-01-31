@@ -152,10 +152,10 @@ void	testShrubberyCreationFormKO()
 {
 	try
 	{
+		std::cout << "\nShrubberyCreationForm KO:" << std::endl;
 		ShrubberyCreationForm	A;
 		Bureaucrat				one;
 
-		std::cout << "\nShrubberyCreationForm KO:" << std::endl;
 		std::cout << one << std::endl;
 		std::cout << A << std::endl;
 		one.signForm(A);
@@ -192,10 +192,10 @@ void	testRobotomyRequestFormKO()
 {
 	try
 	{
+		std::cout << "\nRobotomyRequestForm KO:" << std::endl;
 		RobotomyRequestForm	A;
 		Bureaucrat				one;
 
-		std::cout << "\nRobotomyRequestForm KO:" << std::endl;
 		std::cout << one << std::endl;
 		std::cout << A << std::endl;
 		one.signForm(A);
@@ -212,10 +212,10 @@ void	testRobotomyRequestFormOK()
 {
 	try
 	{
+		std::cout << "\nRobotomyRequestForm OK:" << std::endl;
 		RobotomyRequestForm	A;
 		Bureaucrat				one("perro sanchez", 40);
 
-		std::cout << "\nRobotomyRequestForm OK:" << std::endl;
 		std::cout << one << std::endl;
 		std::cout << A << std::endl;
 		one.signForm(A);
@@ -252,10 +252,10 @@ void	testPresidentialPardonFormOK()
 {
 	try
 	{
-		PresidentialPardonForm	A;
-		Bureaucrat				one("perro sanchez", 3);
-
 		std::cout << "\nPresidentialPardonForm OK:" << std::endl;
+		PresidentialPardonForm	A;
+		Bureaucrat				one("perro sanchez", 5);
+
 		std::cout << one << std::endl;
 		std::cout << A << std::endl;
 		one.signForm(A);
