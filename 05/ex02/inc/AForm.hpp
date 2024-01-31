@@ -16,15 +16,15 @@ class AForm
 		AForm();
 		AForm(std::string _name, int _grade_to_sign, int _grade_to_execute);
 		AForm(class AForm& Copy);
-		AForm		operator=(class AForm& Copy);
+		AForm			operator=(class AForm& Copy);
 		~AForm();
-		std::string	getName() const;
-		int			getGradetoSign();
-		int			getGradetoExecute();
-		bool		getStatus();
-		int			beSigned(Bureaucrat& one);
-		int			execute(Bureaucrat const & one) const;
-
+		std::string		getName() const;
+		int				getGradetoSign();
+		int				getGradetoExecute();
+		bool			getStatus();
+		int				beSigned(Bureaucrat& one);
+		int				execute(Bureaucrat const & one) const;
+		void	function() const;// = 0;
 		void		check();
 		class		GradeTooHighException
 		{

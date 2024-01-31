@@ -148,6 +148,24 @@ void	testWorngAForms()
 	}
 }
 
+void	testShrubberyCreationForm()
+{
+	try
+	{
+		ShrubberyCreationForm	A;
+		Bureaucrat				one;
+
+		std::cout << "\nShrubberyCreationForm:" << std::endl;
+		std::cout << one << std::endl;
+		std::cout << A << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
+}
+
 int main()
 {
 	testDefault();
@@ -157,5 +175,6 @@ int main()
 	testExecuteLow();
 	testExecuteNotSigned();
 	testWorngAForms();
+	testShrubberyCreationForm();
 	return 0;
 }

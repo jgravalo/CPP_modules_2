@@ -45,7 +45,13 @@ int		AForm::execute(Bureaucrat const& one) const
 		GradeTooLowException();
 		return -1;
 	}
+	
 	return 0;
+}
+
+void		AForm::function() const
+{
+	std::cout << "hola" << std::endl;
 }
 
 std::string	AForm::getName() const
