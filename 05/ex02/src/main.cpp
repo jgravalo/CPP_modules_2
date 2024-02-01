@@ -254,7 +254,7 @@ void	testPresidentialPardonFormOK()
 	{
 		std::cout << "\nPresidentialPardonForm OK:" << std::endl;
 		PresidentialPardonForm	A;
-		Bureaucrat				one("perro sanchez", 5);
+		Bureaucrat				one("perro sanchez", 0);
 
 		std::cout << one << std::endl;
 		std::cout << A << std::endl;

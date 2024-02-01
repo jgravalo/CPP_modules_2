@@ -38,7 +38,7 @@ void		ShrubberyCreationForm::function() const
         std::cout << "Error to open infile" << std::endl;
         return ;
     }*/
-	outfile.open(target + "_shrubbery");
+	outfile.open(/* target +  */"_shrubbery");
 	if (!outfile)
     {
         std::cout << "Error to open outfile" << std::endl;
