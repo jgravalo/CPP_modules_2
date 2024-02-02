@@ -3,7 +3,7 @@
 
 void	testDefault()
 {
-	std::cout << "default:" << std::endl;
+	std::cout << "\ndefault:" << std::endl;
 	try
 	{
 		Bureaucrat  Bureaucrat;
@@ -22,10 +22,10 @@ void	testDefault()
 
 void	testArgs()
 {
-	std::cout << "Args:" << std::endl;
+	std::cout << "\nArgs:" << std::endl;
 	try
 	{
-		Bureaucrat  Bureaucrat("perro sanchez", 151);
+		Bureaucrat  Bureaucrat("pedro sanchez", 151);
 
 		std::cout << Bureaucrat << std::endl;
 		std::cout << "finish" << std::endl;
@@ -38,24 +38,23 @@ void	testArgs()
 
 void	testCopy()
 {
-	std::cout << "Copy:" << std::endl;
+	std::cout << "\nCopy:" << std::endl;
 	try
 	{
-		Bureaucrat  one("perro sanchez", 3);
+		Bureaucrat  one("pedro sanchez", 3);
 		Bureaucrat  two(one);
 
-		std::cout << one << std::endl;
-		std::cout << two << std::endl;
+		std::cout << "one: " << one << std::endl;
+		std::cout << "two: " << two << std::endl;
 		one.gradePromotion();
-		std::cout << one << std::endl;
-		std::cout << two << std::endl;
+		std::cout << "one: " << one << std::endl;
+		std::cout << "two: " << two << std::endl;
 		one.gradePromotion();
 		two = one;
-		std::cout << one << std::endl;
-		std::cout << two << std::endl;
+		std::cout << "one: " << one << std::endl;
+		std::cout << "two: " << two << std::endl;
 		one.gradePromotion();
-		std::cout << one << std::endl;
-		std::cout << "finish" << std::endl;
+		std::cout << "one: " << one << std::endl;
 	}
 	catch (const std::exception& e)
 	{
@@ -70,7 +69,7 @@ void	testSignOK()
 		Form		A;
 		Bureaucrat	one;
 
-		std::cout << "sign OK:" << std::endl;
+		std::cout << "\nsign OK:" << std::endl;
 		std::cout << one << std::endl;
 		std::cout << A << std::endl;
 		one.signForm(A);
@@ -80,7 +79,6 @@ void	testSignOK()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
 }
 
 void	testSignLow()
@@ -90,7 +88,7 @@ void	testSignLow()
 		Form		A("nuclear", 149, 150);
 		Bureaucrat	one;
 
-		std::cout << "sign low:" << std::endl;
+		std::cout << "\nsign low:" << std::endl;
 		std::cout << one << std::endl;
 		std::cout << A << std::endl;
 		one.signForm(A);
@@ -105,7 +103,7 @@ void	testSignLow()
 
 void	testWorngForms()
 {
-	std::cout << "form low:" << std::endl;
+	std::cout << "\nform low:" << std::endl;
 	try
 	{
 		Form		A("nuclear", 151, 150);
@@ -115,7 +113,7 @@ void	testWorngForms()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	std::cout << "form high:" << std::endl;
+	std::cout << "\nform high:" << std::endl;
 	try
 	{
 		Form		A("nuclear", 0, 150);
