@@ -83,9 +83,9 @@ void	ScalarConverter::df_convert(std::string str, char type, char target)
 		else if (type == 'f')
 			res = num + dec / pow(10, sdec.length() - 1);
 		if (sdec.length() > prec)
-			std::cout << std::setprecision(prec);
+			std::cout << std::setprecision(snum.length() + prec);
 		else
-			std::cout << std::setprecision(sdec.length() + 1);
+			std::cout << std::setprecision(snum.length() + sdec.length() + 1);
 		std::cout << res;// << std::endl;
 	}
 	else if (type == 'c' || type == 'i')
@@ -203,7 +203,9 @@ void	ScalarConverter::convert(std::string str)
 {
 	str = roundstr(str);
 	char c = recognize(str);
-	std::cout << "c is a " << recognize(str) << std::endl;
+	std::cout << "c is a " << c << std::endl;
+	if (c == 's')
+		return ;
 
 	std::cout << "char: ";
 	c_convert(str, c);
