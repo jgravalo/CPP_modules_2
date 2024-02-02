@@ -2,7 +2,7 @@
 
 void	testDefault()
 {
-	std::cout << "default:" << std::endl;
+	std::cout << "\ndefault:" << std::endl;
 	try
 	{
 		Bureaucrat  Bureaucrat;
@@ -18,10 +18,10 @@ void	testDefault()
 
 void	testArgs()
 {
-	std::cout << "Low Exception:" << std::endl;
+	std::cout << "\nLow Exception:" << std::endl;
 	try
 	{
-		Bureaucrat  Bureaucrat("perro sanchez", 151);
+		Bureaucrat  Bureaucrat("pedro sanchez", 151);
 		std::cout << Bureaucrat << std::endl;
 	}
 	catch (const std::exception& e)
@@ -32,23 +32,23 @@ void	testArgs()
 
 void	testCopy()
 {
-	std::cout << "High Exception:" << std::endl;
+	std::cout << "\nHigh Exception:" << std::endl;
 	try
 	{
-		Bureaucrat  one("perro sanchez", 3);
+		Bureaucrat  one("pedro sanchez", 3);
 		Bureaucrat  two(one);
 
-		std::cout << one << std::endl;
-		std::cout << two << std::endl;
+		std::cout << "one: " << one << std::endl;
+		std::cout << "two: " << two << std::endl;
 		one.gradePromotion();
-		std::cout << one << std::endl;
-		std::cout << two << std::endl;
+		std::cout << "one: " << one << std::endl;
+		std::cout << "two: " << two << std::endl;
 		one.gradePromotion();
 		two = one;
-		std::cout << one << std::endl;
-		std::cout << two << std::endl;
+		std::cout << "one: " << one << std::endl;
+		std::cout << "two: " << two << std::endl;
 		one.gradePromotion();
-		std::cout << one << std::endl;
+		std::cout << "one: " << one << std::endl;
 	}
 	catch (const std::exception& e)
 	{
