@@ -163,6 +163,8 @@ void	testShrubberyCreationFormKO()
 		one.signForm(*A);
 		one.executeForm(*A);
 		std::cout << "finish" << std::endl;
+		if (A)
+			delete A;
 	}
 	catch(const std::exception& e)
 	{
@@ -185,6 +187,8 @@ void	testShrubberyCreationFormOK()
 		one.signForm(*A);
 		one.executeForm(*A);
 		std::cout << "finish" << std::endl;
+		if (A)
+			delete A;
 	}
 	catch(const std::exception& e)
 	{
@@ -207,6 +211,8 @@ void	testRobotomyRequestFormKO()
 		one.signForm(*A);
 		one.executeForm(*A);
 		std::cout << "finish" << std::endl;
+		if (A)
+			delete A;
 	}
 	catch(const std::exception& e)
 	{
@@ -229,6 +235,8 @@ void	testRobotomyRequestFormOK()
 		one.signForm(*A);
 		one.executeForm(*A);
 		std::cout << "finish" << std::endl;
+		if (A)
+			delete A;
 	}
 	catch(const std::exception& e)
 	{
@@ -251,6 +259,8 @@ void	testPresidentialPardonFormKO()
 		one.signForm(*A);
 		one.executeForm(*A);
 		std::cout << "finish" << std::endl;
+		if (A)
+			delete A;
 	}
 	catch(const std::exception& e)
 	{
@@ -267,37 +277,39 @@ void	testPresidentialPardonFormOK()
 		Bureaucrat				one("perro sanchez", 5);
 		Intern I;
 		AForm *A = I.makeForm("presidential pardon", "perro sanchez");
+		//AForm *A = new PresidentialPardonForm("perro sanchez");
 
 		std::cout << one << std::endl;
 		std::cout << *A << std::endl;
 		one.signForm(*A);
 		one.executeForm(*A);
 		std::cout << "finish" << std::endl;
+		if (A)
+			delete A;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
 }
-/* 
+
 void testIntern()
 {
 	try
 	{
 		Intern I;
 
-		AForm *A = I.makeForm("shrubbery creation", "perro sanchez");
-		AForm *A = new ShrubberyCreationForm();
+		AForm *A = I.makeForm("shrubbery creatio", "perro sanchez");
 		std::cout << *A << std::endl;
-		//if (A)
-		//	delete A;
+		if (A)
+			delete A;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
 	
-} */
+}
 
 int main()
 {
@@ -309,6 +321,7 @@ int main()
 	testExecuteLow();
 	testExecuteNotSigned();
 	testWorngAForms(); */
+	
 	testShrubberyCreationFormKO();
 	testShrubberyCreationFormOK();
 	testRobotomyRequestFormKO();
