@@ -29,15 +29,8 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 void		ShrubberyCreationForm::function() const
 {
 	std::cout << "ShrubberyCreationForm function" << std::endl;
-	//std::ofstream	infile;
 	std::ofstream	outfile;
-/* 
-	infile.open(".ascii_tree");
-	if (infile.is_open())
-	{
-        std::cout << "Error to open infile" << std::endl;
-        return ;
-    }*/
+
 	outfile.open( target +  "_shrubbery");
 	if (!outfile)
     {
