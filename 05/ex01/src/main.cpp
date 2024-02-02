@@ -98,7 +98,6 @@ void	testSignLow()
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
 }
 
 void	testWorngForms()
