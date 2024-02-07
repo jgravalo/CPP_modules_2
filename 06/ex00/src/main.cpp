@@ -1,5 +1,4 @@
 #include<ScalarConverter.hpp>
-//#include<iostream>
 
 int main(int argc, char **argv)
 {
@@ -17,6 +16,12 @@ int main(int argc, char **argv)
 	//std::cout << std::setprecision(15);
 	//std::cout << f << std::endl;
 	//std::cout << str.find('+') << std::endl;
+	//std::cout << "a = " << '\75' << std::endl;
+	double d = 635.1234567;
+	std::cout << d - roundf(d) << std::endl;
+	std::cout << 214.7495 << std::endl;
+	std::cout << "atoi = " << atoi(argv[1]) << std::endl;
+	std::cout << "atof = " << atof(argv[1]) << std::endl;
 	ScalarConverter::convert(str);
 /* 	int n = str.find('.');
 	int len = str.length();

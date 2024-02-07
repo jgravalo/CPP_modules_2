@@ -18,7 +18,7 @@ ScalarConverter&	ScalarConverter::operator=(class ScalarConverter& Copy)
 ScalarConverter::~ScalarConverter()
 {
 }
-
+/*
 void	ScalarConverter::c_convert(std::string str, char type)
 {
 	char c = 0;
@@ -101,30 +101,27 @@ void	ScalarConverter::df_convert(std::string str, char type, char target)
 		std::cout << "f";// << std::endl;
 	//return (res);
 }
-/*
-void	ScalarConverter::d_convert(std::string str, char type)
+// 
+void	ScalarConverter::df_convert(std::string str, char type, char target)
 {
-	int n = str.find('.');
-	std::string snum = str.substr(0, n);
-	long num = atol(snum.c_str());
-	n++;
-	int len = str.length();
-	std::string	sdec = str.substr(n, len - n);
-
-	double dec = 0;
-	if (n > 0)
-		dec = atol(sdec.c_str());
-	std::cout << num << " + " << dec << " = ";
-	double res = num + dec / pow(10, sdec.length());
-	if (sdec.length() > 15)
-		std::cout << std::setprecision(15);
-	else
-		std::cout << std::setprecision(sdec.length() + 1);
-	std::cout << res;// << std::endl;
-	//std::cout << ".0";// << std::endl;
-	//return (res);
-}*/
-
+	double res;
+	if (type == 'd' || type == 'f')
+	{
+		res = atof(str.c_str());
+	}
+	else if (type == 'c' || type == 'i')
+	{
+		if (type == 'c')
+			res = str[0];
+		if (type == 'i')
+			res = atoi(str.c_str());
+		std::cout << res;// << std::endl;
+		std::cout << ".0";// << std::endl;
+	}
+	if (target == 'f')
+		std::cout << "f";// << std::endl;
+}
+ */
 char	ScalarConverter::isnum(std::string str)
 {
 	int i = 0;
@@ -148,8 +145,9 @@ char	ScalarConverter::isnum(std::string str)
 	if (str[i] == 'e')
 	{
 		i++;
-		if (str[i] == '+' && str[i] == '-')
+		if (str[i] == '+' || str[i] == '-')
 			i++;
+		std::cout << str[i] << str[i + 1] << std::endl;
 		if (!(str[i] >= '0' && str[i]<= '9'))
 			return 0;
 		while (str[i] >= '0' && str[i]<= '9')
@@ -183,7 +181,7 @@ char	ScalarConverter::recognize(std::string str)
 		return (c);
 	return (0);
 }
-
+/* 
 std::string	ScalarConverter::roundstr(std::string str)
 {
 	char c = recognize(str);
@@ -193,33 +191,92 @@ std::string	ScalarConverter::roundstr(std::string str)
 		return (str);
 	for (i = n + 1; str[i] == '0'; i++)
 		;
-	if (!str[i] || (str[i] == 'f' && !str[i + 1])
-		|| (str[i] == 'e'))
+	if (!str[i] || (str[i] == 'f' && !str[i + 1]))
+		//|| (str[i] == 'e'))
 		str = str.substr(0, n);
 	return (str);
+}
+ */
+void	ScalarConverter::c_convert(int i, double d)//, char type)
+{
+	if (d - i != 0)
+		std::cout << "impossible";
+	else
+	{
+		char c = i;
+		if (c < 32 || c > 126)
+			std::cout << "non printable";
+		else
+			std::cout << c;
+	}
+}
+
+void	ScalarConverter::i_convert(int i, double d)//, char type)
+{
+	if (d - i != 0)
+	{
+		//std::cout << "d = " << d << std::endl;
+		//std::cout << "i = " << i << std::endl;
+		std::cout << "impossible";
+	}
+	else
+		std::cout << i;
+}
+
+void	ScalarConverter::f_convert(int i, double d)//, char type)
+{
+	std::cout << d;
+	if (d - i == 0)
+		std::cout << ".0";
+	std::cout << "f";
+}
+
+void	ScalarConverter::d_convert(int i, double d)//, char type)
+{
+	std::cout << d;
+	if (d - i == 0)
+		std::cout << ".0";
 }
 
 void	ScalarConverter::convert(std::string str)
 {
-	str = roundstr(str);
+	//str = roundstr(str);
 	char c = recognize(str);
 	std::cout << "c is a " << c << std::endl;
 	if (c == 's')
 		return ;
+	double	d = 0;
+	if (c == 'c')
+		d = (double)str[0];
+	else
+		d = atof(str.c_str());
+	double	i = 0;
+	//if (str.length() > 7)
+		i = roundf(d);
+	//else
+		//i = atoi(str.c_str());
 
+	std::cout << "d = " << d << std::endl;
+	std::cout << "i = " << i << std::endl;
+
+	std::cout << std::endl;
 	std::cout << "char: ";
-	c_convert(str, c);
+	//c_convert(str, c);
+	c_convert(i, d);//, c);
 	std::cout << std::endl;
 
 	std::cout << "int: ";
-	i_convert(str, c);
+	//i_convert(str, c);
+	i_convert(i, d);//, c);
 	std::cout << std::endl;
 
 	std::cout << "float: ";
-	df_convert(str, c, 'f');
+	//df_convert(str, c, 'f');
+	f_convert(i, d);//, c);
 	std::cout << std::endl;
 
 	std::cout << "double: ";
-	df_convert(str, c, 'd');
+	//df_convert(str, c, 'd');
+	d_convert(i, d);//, c);
 	std::cout << std::endl;
 }
