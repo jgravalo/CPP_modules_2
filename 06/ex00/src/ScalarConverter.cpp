@@ -199,7 +199,9 @@ std::string	ScalarConverter::roundstr(std::string str)
  */
 void	ScalarConverter::c_convert(double i, double d)//, char type)
 {
-	if (d - i != 0)
+	double dec = d - i;
+	dec -= roundf(dec);
+	if (dec != 0)
 		std::cout << "impossible";
 	else
 	{
@@ -214,7 +216,9 @@ void	ScalarConverter::c_convert(double i, double d)//, char type)
 void	ScalarConverter::i_convert(double i, double d)//, char type)
 {
 	//std::cout << "res = " << d - i << std::endl;
-	if (d - i != 0 )
+	double dec = d - i;
+	dec -= roundf(dec);
+	if (dec != 0)
 	{
 		//std::cout << "d = " << d << std::endl;
 		//std::cout << "i = " << i << std::endl;
@@ -257,10 +261,19 @@ void	ScalarConverter::convert(std::string str)
 	//else
 		//i = atoi(str.c_str());
 
-	std::cout << std::setprecision(10);
+	//std::cout << std::setprecision(10);
 	std::cout << "d = " << d << std::endl;
 	std::cout << "i = " << i << std::endl;
-	std::cout << "res = " << d - i << std::endl;
+	double res = d - i;
+	//std::cout << "res / = " << d / i << std::endl;
+	//std::cout << "res - = " << res << std::endl;
+	//std::cout << "res = " << roundf(res) << std::endl;
+	res -= roundf(res);
+	std::cout << "res = " << res << std::endl;
+	//std::cout << "res = " << res - roundf(res) << std::endl;
+
+	//327657e9   bien
+	//567656546f error
 
 	std::cout << std::endl;
 	std::cout << "-----------------------------------------------" << std::endl;
