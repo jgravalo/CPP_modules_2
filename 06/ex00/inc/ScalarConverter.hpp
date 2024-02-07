@@ -16,10 +16,10 @@ class ScalarConverter
 /* 		static void			c_convert(std::string str, char type);
 		static void			i_convert(std::string str, char type);
 		static void			df_convert(std::string str, char type, char target); */
-		static void			c_convert(int i, double d);//, char type);
-		static void			i_convert(int i, double d);//, char type);
-		static void			f_convert(int i, double d);//, char type);
-		static void			d_convert(int i, double d);//, char type);
+		static void			c_convert(double i, double d);//, char type);
+		static void			i_convert(double i, double d);//, char type);
+		static void			f_convert(double i, double d);//, char type);
+		static void			d_convert(double i, double d);//, char type);
 		//static double	atod(std::string str);
 	public:
 		ScalarConverter();

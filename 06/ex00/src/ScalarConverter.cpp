@@ -125,29 +125,29 @@ void	ScalarConverter::df_convert(std::string str, char type, char target)
 char	ScalarConverter::isnum(std::string str)
 {
 	int i = 0;
-	char c = 0;
-	
+
+	if (str[i] == '+' || str[i] == '-')
+			i++;
 	if (!(str[i] >= '0' && str[i]<= '9'))
 		return 0;
 	while (str[i] >= '0' && str[i]<= '9')
 		i++;
 	if (!str[i])
 		return ('i');
-	else if (str[i] != '.')
-		return 0;
-	i++;
-	if (!(str[i] >= '0' && str[i]<= '9'))
-		return 0;
-	while (str[i] >= '0' && str[i]<= '9')
+	else if (str[i] == '.')
+	{
 		i++;
-	if (!str[i])
-		return ('d');
+		if (!(str[i] >= '0' && str[i]<= '9'))
+			return 0;
+		while (str[i] >= '0' && str[i]<= '9')
+			i++;
+	}
 	if (str[i] == 'e')
 	{
 		i++;
 		if (str[i] == '+' || str[i] == '-')
 			i++;
-		std::cout << str[i] << str[i + 1] << std::endl;
+		//std::cout << str[i] << str[i + 1] << std::endl;
 		if (!(str[i] >= '0' && str[i]<= '9'))
 			return 0;
 		while (str[i] >= '0' && str[i]<= '9')
@@ -157,7 +157,7 @@ char	ScalarConverter::isnum(std::string str)
 		return ('d');
 	else if (str[i] == 'f' && !str[i + 1])
 		return ('f');
-	return (c);
+	return (0);
 }
 
 char	ScalarConverter::ischr(std::string str)
@@ -197,7 +197,7 @@ std::string	ScalarConverter::roundstr(std::string str)
 	return (str);
 }
  */
-void	ScalarConverter::c_convert(int i, double d)//, char type)
+void	ScalarConverter::c_convert(double i, double d)//, char type)
 {
 	if (d - i != 0)
 		std::cout << "impossible";
@@ -211,9 +211,10 @@ void	ScalarConverter::c_convert(int i, double d)//, char type)
 	}
 }
 
-void	ScalarConverter::i_convert(int i, double d)//, char type)
+void	ScalarConverter::i_convert(double i, double d)//, char type)
 {
-	if (d - i != 0)
+	//std::cout << "res = " << d - i << std::endl;
+	if (d - i != 0 )
 	{
 		//std::cout << "d = " << d << std::endl;
 		//std::cout << "i = " << i << std::endl;
@@ -223,7 +224,7 @@ void	ScalarConverter::i_convert(int i, double d)//, char type)
 		std::cout << i;
 }
 
-void	ScalarConverter::f_convert(int i, double d)//, char type)
+void	ScalarConverter::f_convert(double i, double d)//, char type)
 {
 	std::cout << d;
 	if (d - i == 0)
@@ -231,7 +232,7 @@ void	ScalarConverter::f_convert(int i, double d)//, char type)
 	std::cout << "f";
 }
 
-void	ScalarConverter::d_convert(int i, double d)//, char type)
+void	ScalarConverter::d_convert(double i, double d)//, char type)
 {
 	std::cout << d;
 	if (d - i == 0)
@@ -256,10 +257,13 @@ void	ScalarConverter::convert(std::string str)
 	//else
 		//i = atoi(str.c_str());
 
+	std::cout << std::setprecision(10);
 	std::cout << "d = " << d << std::endl;
 	std::cout << "i = " << i << std::endl;
+	std::cout << "res = " << d - i << std::endl;
 
 	std::cout << std::endl;
+	std::cout << "-----------------------------------------------" << std::endl;
 	std::cout << "char: ";
 	//c_convert(str, c);
 	c_convert(i, d);//, c);
@@ -279,4 +283,5 @@ void	ScalarConverter::convert(std::string str)
 	//df_convert(str, c, 'd');
 	d_convert(i, d);//, c);
 	std::cout << std::endl;
+	std::cout << "-----------------------------------------------" << std::endl;
 }
