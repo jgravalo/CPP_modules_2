@@ -4,7 +4,7 @@ template <typename T>
 Array<T>::Array()
 {
 	//arr = new T();
-	this->arr = NULL;
+	this->arr = new T[0];
 	this->_size = 0;
 }
 
@@ -57,6 +57,8 @@ int	Array<T>::size()
 template <typename T>
 T*	Array<T>::clone()
 {
-	T	*clone = new T(this->arr);
+	T*	clone = new T(this->_size);
+	for (size_t i = 0; i < this->_size; i++)
+		clone[i] = arr[i];
 	return (clone);
 }
