@@ -3,48 +3,22 @@
 
 #include<iostream>
 
-template <typename T>
+template <class T>
 class Array
 {
 	private:
-		T	*T;
+		T				*arr;
+		unsigned int	_size;
 	public:
 		Array();
 		Array(unsigned int n);
 		Array(class Array& Copy);
 		Array&	operator=(class Array& Copy);
 		~Array();
-		Array&	operator[](int n);
+		T*	clone();
+		T&	operator[](int n);
+		int	size();
+
 };
 
 #endif
-
-Array::Array()
-{
-}
-
-Array::Array(unsigned int n)
-{
-	T = n;
-}
-
-Array::Array(class Array& Copy)
-{
-	(void)Copy;
-}
-
-Array&	Array::operator=(class Array& Copy)
-{
-	(void)Copy;
-	return (*this);
-}
-
-Array::~Array()
-{
-}
-
-Array&	Array::operator[](int n)
-{
-	return (T);
-}
-
