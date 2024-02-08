@@ -68,6 +68,17 @@ char	ScalarConverter::ischr(std::string str)
 	return (0);
 }
 
+char	ScalarConverter::isnon(std::string str)
+{
+	if (str == "nan" || str == "nanf")
+		return ('n');
+	if (str == "+inf" || str == "+inff")
+		return ('+');
+	if (str == "-inf" || str == "-inff")
+		return ('-');
+	return (0);
+}
+
 int		ScalarConverter::isdec(std::string str, char type)
 {
 	double	d = 0;
@@ -86,6 +97,9 @@ int		ScalarConverter::isdec(std::string str, char type)
 char	ScalarConverter::recognize(std::string str)
 {
 	char c;
+	c = isnon(str);
+	if (c)
+		return (c);
 	c = isnum(str);
 	if (c)
 		return (c);
@@ -95,23 +109,23 @@ char	ScalarConverter::recognize(std::string str)
 	return (0);
 }
 
-void	ScalarConverter::c_convert(double i, double dec)
+void	ScalarConverter::c_convert(double i, double dec, std::string str)
 {
-	if (dec != 0)
+	if (dec != 0 || isnon(str))
 		std::cout << "impossible";
 	else
 	{
-		char c = i;
+		char c = static_cast<char>(i);
 		if (c < 32 || c > 126)
 			std::cout << "non printable";
 		else
-			std::cout << c;
+			std::cout << "\'" << c << "\'";
 	}
 }
 
-void	ScalarConverter::i_convert(double d, double dec)
+void	ScalarConverter::i_convert(double d, double dec, std::string str)
 {
-	if (dec != 0)
+	if (dec != 0 || isnon(str))
 		std::cout << "impossible";
 	else if (d < -2147483648)
 		std::cout << "-inf";
@@ -119,21 +133,25 @@ void	ScalarConverter::i_convert(double d, double dec)
 		std::cout << "inf";
 	else
 	{
-		int	n = d;
+		int	n = static_cast<int>(d);
 		std::cout << n;
 	}
 }
 
-void	ScalarConverter::f_convert(double d, double dec)
+void	ScalarConverter::f_convert(double d, double dec, std::string str)
 {
+	if (dec != 0 && str.length() > 6 && d < 1000000)
+		std::cout << std::setprecision(str.length());
 	std::cout << d;
 	if (dec == 0)
 		std::cout << ".0";
 	std::cout << "f";
 }
 
-void	ScalarConverter::d_convert(double d, double dec)
+void	ScalarConverter::d_convert(double d, double dec, std::string str)
 {
+	if (dec != 0 && str.length() > 6 && d < 1000000)
+		std::cout << std::setprecision(str.length());
 	std::cout << d;
 	if (dec == 0)
 		std::cout << ".0";
@@ -141,10 +159,8 @@ void	ScalarConverter::d_convert(double d, double dec)
 
 void	ScalarConverter::convert(std::string str)
 {
-	//str = roundstr(str);
 	char c = recognize(str);
-	std::cout << "c is a " << c << std::endl;
-	if (c == 's')
+	if (c == 's' && !isnon(str))
 		return ;
 	double	d = 0;
 	if (c == 'c')
@@ -152,29 +168,24 @@ void	ScalarConverter::convert(std::string str)
 	else
 		d = atof(str.c_str());
 	double	i = roundf(d);
-	std::cout << "d = " << d << std::endl;
-	std::cout << "i = " << i << std::endl;
 	double dec = d - i;
-	std::cout << "dec = " << dec << std::endl;
 	dec -= roundf(dec);
-	std::cout << "dec = " << dec << std::endl;
 
-	//std::cout << std::endl;
 	//std::cout << "-----------------------------------------------" << std::endl;
 	std::cout << "char: ";
-	c_convert(i, dec);
+	c_convert(i, dec, str);
 	std::cout << std::endl;
 
 	std::cout << "int: ";
-	i_convert(d, dec);
+	i_convert(d, dec, str);
 	std::cout << std::endl;
 
 	std::cout << "float: ";
-	f_convert(d, dec);
+	f_convert(d, dec, str);
 	std::cout << std::endl;
 
 	std::cout << "double: ";
-	d_convert(d, dec);
+	d_convert(d, dec, str);
 	std::cout << std::endl;
 	//std::cout << "-----------------------------------------------" << std::endl;
 }
