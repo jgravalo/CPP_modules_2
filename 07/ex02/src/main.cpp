@@ -32,8 +32,30 @@ void testNulls()
 	std::cout << std::endl;
 	std::cout << "Int:" << std::endl;
 	std::cout << i[0] << std::endl;
+		std::cout << "aqui" << std::endl;
 	std::cout << "Char:" << std::endl;
 	std::cout << c[0] << std::endl;
+}
+
+void testInvalid()
+{
+	try
+	{
+		int			tmp[6] = {4, INT_MIN, 1, INT_MAX, 9};
+		Array<int>	arr(6);
+
+		std::cout << "\nInt:" << std::endl;
+		for (size_t i = 0; i < 6; i++)
+			arr[i] = tmp[i];
+		std::cout << arr[0] << std::endl;
+		std::cout << arr[5] << std::endl;
+		std::cout << arr[6] << std::endl;
+		std::cout << arr[7] << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 }
 
 void testInt()
@@ -91,6 +113,7 @@ int main()
 	std::cout << *a << std::endl;
 	testCopy();
 	testNulls();
+	testInvalid();
 	testInt();
 	testChar();
 	testFloat();

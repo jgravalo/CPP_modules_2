@@ -3,7 +3,6 @@
 template <typename T>
 Array<T>::Array()
 {
-	//arr = new T();
 	this->arr = new T[0];
 	this->_size = 0;
 }
@@ -19,7 +18,6 @@ template <typename T>
 Array<T>::Array(class Array<T>& Copy)
 {
 	this->_size = Copy.size();
-	//this->arr = new Array(Copy.arr);
 	this->arr = Copy.clone();
 }
 
@@ -29,7 +27,6 @@ Array<T>&	Array<T>::operator=(class Array<T>& Copy)
 	if (this->arr)
 		delete this->arr;
 	this->_size = Copy.size();
-	//this->arr = new Array(Copy.arr);
 	this->arr = Copy.clone();
 	return (*this);
 }
@@ -39,12 +36,13 @@ Array<T>::~Array()
 {
 	if (this->arr)
 		delete this->arr;
-	//std::cout << "aqui" << std::endl;
 }
 
 template <typename T>
 T&	Array<T>::operator[](int n)
 {
+	if (n < 0 || (unsigned int)n > this->_size)
+		throw std::out_of_range("exception");
 	return (this->arr[n]);
 }
 
