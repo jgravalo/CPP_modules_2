@@ -167,7 +167,7 @@ int		ScalarConverter::convert(std::string str)
 	}
 	double	d = 0;
 	if (c == 'c')
-		d = (double)str[0];
+		d = static_cast<double>(str[0]);
 	else
 		d = atof(str.c_str());
 	double	i = roundf(d);

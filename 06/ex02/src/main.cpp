@@ -11,11 +11,5 @@ void	test()
 int main()
 {
 	test();
-	test();
-	test();
-	test();
-	test();
-	test();
-	test();
 	return 0;
 }
