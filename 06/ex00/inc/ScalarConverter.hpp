@@ -23,8 +23,8 @@ class ScalarConverter
 		ScalarConverter();
 		ScalarConverter(class ScalarConverter& Copy);
 		ScalarConverter&	operator=(class ScalarConverter& Copy);
-		~ScalarConverter();
-		static void		convert(std::string str);
+		virtual ~ScalarConverter();
+		static int		convert(std::string str);
 		virtual void	f() = 0;
 };
 

@@ -117,7 +117,7 @@ void	ScalarConverter::c_convert(double i, double dec, std::string str)
 	{
 		char c = static_cast<char>(i);
 		if (c < 32 || c > 126)
-			std::cout << "non printable";
+			std::cout << "Non displayable";
 		else
 			std::cout << "\'" << c << "\'";
 	}
@@ -140,28 +140,31 @@ void	ScalarConverter::i_convert(double d, double dec, std::string str)
 
 void	ScalarConverter::f_convert(double d, double dec, std::string str)
 {
-	if (dec != 0 && str.length() > 6 && d < 1000000)
+	if (dec != 0 && str.length() > 6 && abs(d) < 1000000)
 		std::cout << std::setprecision(str.length());
 	std::cout << d;
-	if (dec == 0)
+	if (dec == 0 && abs(d) < 1000000)
 		std::cout << ".0";
 	std::cout << "f";
 }
 
 void	ScalarConverter::d_convert(double d, double dec, std::string str)
 {
-	if (dec != 0 && str.length() > 6 && d < 1000000)
+	if (dec != 0 && str.length() > 6 && abs(d) < 1000000)
 		std::cout << std::setprecision(str.length());
 	std::cout << d;
-	if (dec == 0)
+	if (dec == 0 && abs(d) < 1000000)
 		std::cout << ".0";
 }
 
-void	ScalarConverter::convert(std::string str)
+int		ScalarConverter::convert(std::string str)
 {
 	char c = recognize(str);
 	if (c == 's' && !isnon(str))
-		return ;
+	{
+		std::cerr << "invalid argument" << std::endl;
+		return (1);
+	}
 	double	d = 0;
 	if (c == 'c')
 		d = (double)str[0];
@@ -171,7 +174,6 @@ void	ScalarConverter::convert(std::string str)
 	double dec = d - i;
 	dec -= roundf(dec);
 
-	//std::cout << "-----------------------------------------------" << std::endl;
 	std::cout << "char: ";
 	c_convert(i, dec, str);
 	std::cout << std::endl;
@@ -187,5 +189,5 @@ void	ScalarConverter::convert(std::string str)
 	std::cout << "double: ";
 	d_convert(d, dec, str);
 	std::cout << std::endl;
-	//std::cout << "-----------------------------------------------" << std::endl;
+	return (0);
 }
