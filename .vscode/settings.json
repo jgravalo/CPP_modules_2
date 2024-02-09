@@ -66,6 +66,8 @@
 		"vector": "cpp",
 		"__functional_03": "cpp",
 		"filesystem": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"memory_resource": "cpp",
+		"*.tpp": "cpp"
 	}
 }
