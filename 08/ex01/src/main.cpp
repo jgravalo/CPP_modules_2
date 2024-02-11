@@ -1,22 +1,23 @@
-#include<easyfind.hpp>
+#include<Span.hpp>
 
 int main()
 {
-	int	n[] = {5, 7, 8, 1, INT_MAX};
-	//std::cout << easyfind(n, 8) << std::endl;
-
-	std::vector< int >	vec;
-	std::list< int >	lst;
-	std::deque< int >	que;
-
-	for (size_t i = 0; n[i]; i++)
+	try
 	{
-		vec.push_back(n[i]);
-		lst.push_back(n[i]);
-		que.push_back(n[i]);
+		Span sp = Span(5);
+		//std::cout << sp.shortestSpan() << std::endl;
+		sp.addNumber(6);
+		sp.addNumber(3);
+		sp.addNumber(17);
+		sp.addNumber(9);
+		sp.addNumber(11);
+		//sp.addNumber(10);
+		std::cout << sp.shortestSpan() << std::endl;
+		std::cout << sp.longestSpan() << std::endl;
 	}
-	std::cout << easyfind(vec, 8) << std::endl;
-	std::cout << easyfind(lst, 8) << std::endl;
-	std::cout << easyfind(que, 8) << std::endl;
-	return (0);
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	return 0;
 }

@@ -15,8 +15,18 @@ int main()
 		lst.push_back(n[i]);
 		que.push_back(n[i]);
 	}
-	std::cout << easyfind(vec, 8) << std::endl;
-	std::cout << easyfind(lst, 8) << std::endl;
-	std::cout << easyfind(que, 8) << std::endl;
+	int find = 18;
+
+	try
+	{
+		std::cout << easyfind(vec, find) << std::endl;
+		std::cout << easyfind(lst, find) << std::endl;
+		std::cout << easyfind(que, find) << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	
 	return (0);
 }

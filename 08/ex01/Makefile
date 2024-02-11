@@ -1,11 +1,11 @@
-NAME		=	easyfind
+NAME		=	Span
 CC			=	c++
 EXT			=	.cpp
 CPPFLAGS	=	-Wall -Werror -Wextra -std=c++98
 DEPFLAGS	=	-MMD -MP
 HEADER		=	inc/
 INC			=	-I$(HEADER)
-FILES		=	main 
+FILES		=	main Span
 FILES_CPP	=	$(addsuffix $(EXT),$(FILES))
 SRC_DIR		=	src/
 SRCS		=	$(addprefix $(SRC_DIR),$(FILES_CPP))

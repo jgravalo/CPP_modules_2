@@ -47,9 +47,7 @@ void	identify(Base& p)
 		std::cout << "Indentified by reference, is: A" << std::endl;
 		return ;
 	}
-	catch(const std::exception& e)
-	{
-	}
+	catch(const std::exception& e) {}
 	try
 	{
 		B& a = dynamic_cast< B& >( p );
@@ -57,9 +55,7 @@ void	identify(Base& p)
 		std::cout << "Indentified by reference, is: B" << std::endl;
 		return ;
 	}
-	catch(const std::exception& e)
-	{
-	}
+	catch(const std::exception& e) {}
 	try
 	{
 		C& a = dynamic_cast< C& >( p );
@@ -67,7 +63,5 @@ void	identify(Base& p)
 		std::cout << "Indentified by reference, is: C" << std::endl;
 		return ;
 	}
-	catch(const std::exception& e)
-	{
-	}
+	catch(const std::exception& e){}
 }
