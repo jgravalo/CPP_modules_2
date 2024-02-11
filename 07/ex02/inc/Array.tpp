@@ -42,7 +42,7 @@ template <typename T>
 T&	Array<T>::operator[](int n)
 {
 	if (n < 0 || (unsigned int)n > this->_size)
-		throw std::out_of_range("exception");
+		throw std::out_of_range("invalid range");
 	return (this->arr[n]);
 }
 
