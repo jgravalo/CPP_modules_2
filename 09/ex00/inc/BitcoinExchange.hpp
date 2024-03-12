@@ -3,25 +3,33 @@
 
 #include<iostream>
 #include<fstream>
-#include<map>
+#include<sstream>
+#include<string>
 #include<cctype>
+#include<map>
 
 class BitcoinExchange
 {
 	private:
 		std::map<std::string, float>	btc;
+		int								time[3];
+		int								months[12];// = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	public:
 		BitcoinExchange();
-		//BitcoinExchange(file);
+		BitcoinExchange(std::string file);
 		BitcoinExchange(class BitcoinExchange& Copy);
 		BitcoinExchange&	operator=(class BitcoinExchange& Copy);
 		float	operator[](std::string date);
 		~BitcoinExchange();
 		std::string		parse_date(std::string date);
-		static float			parse_value(std::string value);
+		std::string		makeDate();
+		float			parse_value(std::string value);
+		void			main(char *argv);
 		void			create_map();
-		static void				error(int n);
-		std::string		parse_line(std::string line);
+		void			parse_line(std::string line);
+		static void			error(int n);
+		void			decreaseTime();
+		void			initTime();
 };
 
 #endif
