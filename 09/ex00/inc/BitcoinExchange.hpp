@@ -27,7 +27,7 @@ class BitcoinExchange
 		void			main(char *argv);
 		void			create_map();
 		void			parse_line(std::string line);
-		static void			error(int n);
+		static void			error(int n, std::string date);
 		void			decreaseTime();
 		void			initTime();
 };

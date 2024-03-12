@@ -88,9 +88,9 @@ void		BitcoinExchange::parse_line(std::string line)
 	date = parse_date(line.substr(0, line.find('|') - 1));
 	value = parse_value(line.substr(line.find('|') + 2, line.length()));
 	if (value < 0)
-		this->error(3);
+		this->error(3, "");
 	else if (value > 1000)
-		this->error(4);
+		this->error(4, "");
 	res = operator[](date) * value;
 	std::cout << date << " => " << value << " = " << res << std::endl;
 }
@@ -98,21 +98,21 @@ void		BitcoinExchange::parse_line(std::string line)
 std::string		BitcoinExchange::parse_date(std::string date)
 {
 	if (date.length() != 10)
-		this->error(5);
+		this->error(5, date);
 	std::string	str[3] = {date.substr(0, 4), date.substr(5, 2), date.substr(8, 2)};
 	
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; str[i][j]; j++)
 			if (!std::isdigit(str[i][j]))
-				this->error(5);
+				this->error(5, "");
 	if (atof(str[0].c_str()) < 2008 || atof(str[0].c_str()) > 2022)
-		this->error(5);
+		this->error(5, date);
 	if (atof(str[1].c_str()) < 1 || atof(str[1].c_str()) > 12)
-		this->error(5);
+		this->error(5, date);
 	if (atof(str[2].c_str()) < 1 || atof(str[2].c_str()) > 31)
-		this->error(5);
+		this->error(5, date);
 	if (date[4] != '-' || date[7] != '-')
-		this->error(5);
+		this->error(5, date);
 	return (date);
 }
 
@@ -127,7 +127,7 @@ float			BitcoinExchange::parse_value(std::string value)
 			if (value[i] == '.' && point == 0)
 				point = 1;
 			else
-				this->error(3);
+				this->error(3, "");
 		}
 	n = atof(value.c_str());
 
@@ -143,7 +143,7 @@ void	BitcoinExchange::create_map()
 
 	db.open("data.csv");
 	if (!db.is_open())
-		this->error(2);
+		this->error(2, "");
 	std::getline(db, line);
 	while (std::getline(db, line))
     {
@@ -153,8 +153,9 @@ void	BitcoinExchange::create_map()
     }
 }
 
-void	BitcoinExchange::error(int n)
+void	BitcoinExchange::error(int n, std::string date = "")
 {
+
 	switch (n)
 	{
 		case 1:
@@ -169,7 +170,7 @@ void	BitcoinExchange::error(int n)
 			throw std::out_of_range("Error: too large a number.");
 		case 5:
 			std::string err = "Error: bad input => ";
-			err += "2001-42-42";
+			err += date;
 			throw std::out_of_range(err);
 	}
 }
@@ -180,7 +181,7 @@ void	BitcoinExchange::main(char *argv)
 
 	input.open(argv);
 	if (!input.is_open())
-		error(1);
+		error(1, "");
 	try
 	{
 		create_map();
