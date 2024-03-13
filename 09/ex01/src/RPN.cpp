@@ -13,9 +13,9 @@ RPN::~RPN()
 {
 }
 
-std::vector<std::string>	RPN::ft_split(const std::string &s, char c)
+std::list<std::string>	RPN::ft_split(const std::string &s, char c)
 {
-	std::vector<std::string> tokens;
+	std::list<std::string> tokens;
 	std::string buffer;
 	std::istringstream fd(s);
 
@@ -54,11 +54,16 @@ void	RPN::operar()
 
 int		RPN::loop(std::string argv)
 {
-	vec = ft_split(argv, ' ');
-	for (size_t i = 0; i < vec.size(); i++)
+	lst = ft_split(argv, ' ');
+	std::list<std::string>::iterator it;
+	std::string tmp;
+	int i = 0;
+
+    for (it = lst.begin(); it != lst.end(); ++it)
 	{
-		if (vec[i] == "+" || vec[i] == "-" ||
-			vec[i] == "*" || vec[i] == "/")
+		tmp = *it;
+		if (tmp == "+" || tmp == "-" ||
+			tmp == "*" || tmp == "/")
 		{
 			if (numbers.size() < 2)
 				error();
@@ -66,16 +71,17 @@ int		RPN::loop(std::string argv)
 			numbers.pop_back();
 			n1 = numbers.back();
 			numbers.pop_back();
-			op = vec[i][0];
+			op = tmp[0];
 			operar();
 		}
 		else
 		{
-			for (size_t j = 0; j < vec[i].length(); j++)
-				if (!std::isdigit(vec[i][j]))
+			for (size_t j = 0; j < tmp.length(); j++)
+				if (!std::isdigit(tmp[j]))
 					error();
-			numbers.push_back(atoi(vec[i].c_str()));
+			numbers.push_back(atoi(tmp.c_str()));
 		}
+		i++;
 	}
 	std::cout << numbers.back() << std::endl;
 	return (0);
