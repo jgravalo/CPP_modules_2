@@ -46,9 +46,11 @@ void	PmergeMe::ft_split(const std::string &s, char c)
 
 void	PmergeMe::print()
 {
+	std::cout << "vector = ";
 	for (size_t i = 0; i < vec.size(); i++)
 		std::cout << this->vec[i] << " ";
 	std::cout << std::endl;
+	std::cout << "deque = ";
 	for (size_t i = 0; i < dque.size(); i++)
 		std::cout << this->dque[i] << " ";
 	std::cout << std::endl;
@@ -124,58 +126,32 @@ void	PmergeMe::sort(T &tmp)
 	std::vector<int>	left;
 	std::vector<int>	right;
 	unsigned long		i = 0;
-	//int					size = tmp.size();
 
-	std::cout << "size = " << tmp.size() << std::endl;
-	//std::cout << "medium size = " << tmp.size() / 2 << std::endl;
 	for (; i < (tmp.size() / 2); i++)
-	{
-		//std::cout << tmp[i] << " ";
 		left.push_back(tmp[i]);
-	}
-	//std::cout << " // ";
 	for (; i < tmp.size(); i++)
-	{
-		//std::cout << tmp[i] << " ";
 		right.push_back(tmp[i]);
-	}
-	//std::cout << "\n";
 
 	if (left.size() > 1)
 		this->sort(left);
 	if (right.size() > 1)
 		this->sort(right);
-
-	for (i = 0; i < left.size(); i++)
-		std::cout << left[i] << " ";
-	std::cout << " // ";
-	for (i = 0; i < right.size(); i++)
-		std::cout << right[i] << " ";
-	std::cout << std::endl;
-
-	std::vector<int>	res;
+	T	res;
 	i = 0;
 	unsigned long j = 0;
 	while (res.size() < left.size() + right.size())
 	{
-		std::cout << "(" << left[i] << "," << right[j] << ")";
 		if ((left[i] <= right[j] && i < left.size()) || j >= right.size())
 		{
-			std::cout << left[i] << " ";
 			res.push_back(left[i]);
 			i++;
 		}
-		else// if (left[i] > right[j] && j < right.size())
+		else
 		{
-			std::cout << right[i] << " ";
 			res.push_back(right[j]);
 			j++;
 		}
 	}
-	std::cout << std::endl;
-	for (i = 0; i < res.size(); i++)
-		std::cout << res[i] << " ";
-	std::cout << std::endl;
 	tmp = res;
 }
 
@@ -184,6 +160,8 @@ void	PmergeMe::Ford_Johnson()
 	//std::clock_t		vecTime[ 2 ];
 	//std::clock_t		dqueTime[ 2 ];
 	this->sort(this->vec);
+	this->sort(this->dque);
+	print();
 }
 
 	/* 
