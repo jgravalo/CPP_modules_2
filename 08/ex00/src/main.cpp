@@ -6,6 +6,7 @@ int main()
 	//std::cout << easyfind(n, 8) << std::endl;
 
 	std::vector< int >	vec;
+	std::vector< int >	vec2;
 	std::list< int >	lst;
 	std::deque< int >	que;
 
@@ -15,10 +16,10 @@ int main()
 		lst.push_back(n[i]);
 		que.push_back(n[i]);
 	}
-	int find = 18;
-
+	int find = 8;
 	try
 	{
+		std::cout << easyfind(vec2, find) << std::endl;
 		std::cout << easyfind(vec, find) << std::endl;
 		std::cout << easyfind(lst, find) << std::endl;
 		std::cout << easyfind(que, find) << std::endl;

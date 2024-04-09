@@ -11,15 +11,15 @@ class Span
 		int					stored;
 		int					size;
 	public:
-		//Span();
 		Span(unsigned int N);
-		//Span(class Span& Copy);
-		//Span&	operator=(class Span& Copy);
 		~Span();
-		void	addNumber(int n);
-		int		shortestSpan();
-		int		longestSpan();
-		int		getSize();
+		void				addNumber(int n);
+		int					shortestSpan();
+		int					longestSpan();
+		int					getSize();
+		int					getStored();
+		std::vector<int>	getVec();
+		void					print();
 };
 
 #endif

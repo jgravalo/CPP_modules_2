@@ -5,25 +5,7 @@ Span::Span(unsigned int N)
 	size = N;
 	stored = 0;
 }
-/* 
-Span::Span()s
-{
-	size = 0;
-}
 
-Span::Span(class Span& Copy)
-{
-	//vec = Copy.vec;
-	size = Copy.getSize();
-}
-
-Span&	Span::operator=(class Span& Copy)
-{
-	//vec = Copy.vec;
-	size = Copy.getSize();
-	return (*this);
-}
-*/
 Span::~Span()
 {
 }
@@ -39,6 +21,24 @@ void	Span::addNumber(int n)
 int		Span::getSize()
 {
 	return (size);
+}
+
+int		Span::getStored()
+{
+	return (stored);
+}
+
+std::vector<int>	Span::getVec()
+{
+	return (vec);
+}
+
+void		Span::print()
+{
+	for (size_t i = 0; i < vec.size(); i++)
+	{
+		std::cout << vec[i] << std::endl;
+	}
 }
 
 int		Span::longestSpan()
