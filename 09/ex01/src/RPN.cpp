@@ -57,7 +57,7 @@ int		RPN::loop(std::string argv)
 	lst = ft_split(argv, ' ');
 	std::list<std::string>::iterator it;
 	std::string tmp;
-	int i = 0;
+	unsigned long i = 0;
 
     for (it = lst.begin(); it != lst.end(); ++it)
 	{
@@ -65,21 +65,23 @@ int		RPN::loop(std::string argv)
 		if (tmp == "+" || tmp == "-" ||
 			tmp == "*" || tmp == "/")
 		{
-			if (numbers.size() < 2)
+			if (this->numbers.size() < 2)
 				error();
-			n2 = numbers.back();
-			numbers.pop_back();
-			n1 = numbers.back();
-			numbers.pop_back();
-			op = tmp[0];
-			operar();
+			this->n2 = numbers.back();
+			this->numbers.pop_back();
+			this->n1 = numbers.back();
+			this->numbers.pop_back();
+			this->op = tmp[0];
+			this->operar();
 		}
 		else
 		{
+			if (i + 1 == lst.size())
+					this->error();
 			for (size_t j = 0; j < tmp.length(); j++)
 				if (!std::isdigit(tmp[j]))
-					error();
-			numbers.push_back(atoi(tmp.c_str()));
+					this->error();
+			this->numbers.push_back(atoi(tmp.c_str()));
 		}
 		i++;
 	}
