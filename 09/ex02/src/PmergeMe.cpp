@@ -7,15 +7,6 @@ PmergeMe::PmergeMe()
 PmergeMe::PmergeMe(char **_argv) : argv(_argv)
 {
 	parse_argv();
-/* 	print();
-	rotate(vec);
-	rotate(dque);
-	print();
-	rrotate(vec);
-	rrotate(dque);
-	print();
-	push(vec, dque);
-	print(); */
 	Ford_Johnson();
 }
 
@@ -46,14 +37,19 @@ void	PmergeMe::ft_split(const std::string &s, char c)
 
 void	PmergeMe::print()
 {
-	std::cout << "vector = ";
+	//std::cout << "vector = ";
 	for (size_t i = 0; i < vec.size(); i++)
 		std::cout << this->vec[i] << " ";
 	std::cout << std::endl;
-	std::cout << "deque = ";
+/* 	std::cout << "deque = ";
 	for (size_t i = 0; i < dque.size(); i++)
 		std::cout << this->dque[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl; */
+}
+void	PmergeMe::printTime()
+{
+	std::cout << "Time to process a range of " << this->vecSize << " elements with std::vector : " << this->vec_secs << " us" << std::endl;
+	std::cout << "Time to process a range of " << this->dqueSize << " elements with std::deque : " << this->dque_secs << " us" << std::endl;
 }
 
 void	PmergeMe::parse_argv()
@@ -82,7 +78,65 @@ void	PmergeMe::parse_argv()
 			dque.push_back(n);
 		}
 	}
+	this->dqueSize = dque.size();
+	this->vecSize = vec.size();
 }
+
+template <typename T>
+void	PmergeMe::Sort_Merge(T &tmp)
+{
+	T					res;
+	std::vector<int>	left;
+	std::vector<int>	right;
+	unsigned long		i = 0;
+	unsigned long		j = 0;
+
+	for (; i < (tmp.size() / 2); i++)
+		left.push_back(tmp[i]);
+	for (; i < tmp.size(); i++)
+		right.push_back(tmp[i]);
+
+	if (left.size() > 1)
+		this->Sort_Merge(left);
+	if (right.size() > 1)
+		this->Sort_Merge(right);
+	i = 0;
+	while (res.size() < left.size() + right.size())
+	{
+		if ((left[i] <= right[j] && i < left.size()) || j >= right.size())
+		{
+			res.push_back(left[i]);
+			i++;
+		}
+		else
+		{
+			res.push_back(right[j]);
+			j++;
+		}
+	}
+	tmp = res;
+}
+
+void	PmergeMe::Ford_Johnson()
+{
+	std::cout << "Before: ";
+	print();
+	this->vecTime[0] = clock();
+	this->Sort_Merge(this->vec);
+	this->vecTime[1] = clock();
+	this->vec_secs = double(this->vecTime[1] - this->vecTime[0]);
+
+	this->dqueTime[0] = clock();
+	this->Sort_Merge(this->dque);
+	this->dqueTime[1] = clock();
+	this->dque_secs = double(this->dqueTime[1] - this->dqueTime[0]);
+	std::cout << "After: ";
+	print();
+	printTime();
+}
+
+
+
 /* 
 template <typename A, typename B>
 void	PmergeMe::push(A& a, B& b)
@@ -120,57 +174,3 @@ void	PmergeMe::Push_Swap()
 	} 
 }
 */
-template <typename T>
-void	PmergeMe::sort(T &tmp)
-{
-	std::vector<int>	left;
-	std::vector<int>	right;
-	unsigned long		i = 0;
-
-	for (; i < (tmp.size() / 2); i++)
-		left.push_back(tmp[i]);
-	for (; i < tmp.size(); i++)
-		right.push_back(tmp[i]);
-
-	if (left.size() > 1)
-		this->sort(left);
-	if (right.size() > 1)
-		this->sort(right);
-	T	res;
-	i = 0;
-	unsigned long j = 0;
-	while (res.size() < left.size() + right.size())
-	{
-		if ((left[i] <= right[j] && i < left.size()) || j >= right.size())
-		{
-			res.push_back(left[i]);
-			i++;
-		}
-		else
-		{
-			res.push_back(right[j]);
-			j++;
-		}
-	}
-	tmp = res;
-}
-
-void	PmergeMe::Ford_Johnson()
-{
-	//std::clock_t		vecTime[ 2 ];
-	//std::clock_t		dqueTime[ 2 ];
-	this->sort(this->vec);
-	this->sort(this->dque);
-	print();
-}
-
-	/* 
-	std::deque<int> q1(q.begin(), q.begin() + q.size() / 2);
-	std::deque<int> q2(q.begin() + q.size() / 2, q.end());
-
-		for (size_t i = 0; i < q1.size(); i++)
-		std::cout << q1[i] << " ";
-	std::cout << std::endl;
-	for (size_t i = 0; i < q2.size(); i++)
-		std::cout << q2[i] << " ";
-	std::cout << std::endl; */
