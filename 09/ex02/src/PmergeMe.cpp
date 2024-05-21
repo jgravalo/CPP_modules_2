@@ -37,14 +37,9 @@ void	PmergeMe::ft_split(const std::string &s, char c)
 
 void	PmergeMe::print()
 {
-	//std::cout << "vector = ";
 	for (size_t i = 0; i < vec.size(); i++)
 		std::cout << this->vec[i] << " ";
 	std::cout << std::endl;
-/* 	std::cout << "deque = ";
-	for (size_t i = 0; i < dque.size(); i++)
-		std::cout << this->dque[i] << " ";
-	std::cout << std::endl; */
 }
 void	PmergeMe::printTime()
 {

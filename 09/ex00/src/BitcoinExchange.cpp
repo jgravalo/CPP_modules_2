@@ -42,7 +42,7 @@ float	BitcoinExchange::operator[](std::string date)
 	initTime();
 	for (size_t i = 0; i < 3; i++)
 		this->time[i] = atoi(str[i].c_str());
-	for (size_t i = 0; i < 3; i++)
+	for (size_t i = 0; i < 21; i++)
 	{
 		date = makeDate();
 		if (btc[date] != 0)
@@ -75,7 +75,12 @@ void	BitcoinExchange::decreaseTime()
 	if (this->time[2] == 0)
 	{
 		this->time[1]--;
-		this->time[2] = this->months[this->time[1]];
+		this->time[2] = this->months[this->time[1] - 1];
+	}
+	if (this->time[1] == 0)
+	{
+		this->time[0]--;
+		this->time[1] = 31;
 	}
 }
 
@@ -112,16 +117,16 @@ std::string		BitcoinExchange::parse_date(std::string date)
 		this->error(5, date);
 	std::string	str[3] = {date.substr(0, 4), date.substr(5, 2), date.substr(8, 2)};
 	int			time[3] = {atof(str[0].c_str()), atof(str[1].c_str()), atof(str[2].c_str())};
+	
 	for (int i = 0; i < 3; i++)
 		for (int j = 0; str[i][j]; j++)
 			if (!std::isdigit(str[i][j]))
 				this->error(5, "");
-	if (time[0] < 2008 || time[0] > 2022)
+	if (time[0] > 2024)
 		this->error(5, date);
 	if (time[1] < 1 || time[1] > 12)
 		this->error(5, date);
 	if (this->isDate(time[0], time[1], time[2]))
-	//if (time[2] < 1 || time[2] > 31)
 		this->error(5, date);
 	if (date[4] != '-' || date[7] != '-')
 		this->error(5, date);
@@ -136,7 +141,7 @@ float			BitcoinExchange::parse_value(std::string value)
 	for (size_t i = 0; value[i]; i++)
 		if (!std::isdigit(value[i]))
 		{
-			if (value[i] == '.' && point == 0)
+			if (value[i] == '.' && point == 0 && value[i + 1])
 				point = 1;
 			else
 				this->error(3, "");
