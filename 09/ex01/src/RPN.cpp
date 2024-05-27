@@ -46,10 +46,20 @@ void	RPN::operar()
 			res = n1 * n2;
 			break;
 		case '/':
+			//if (n2 == 0)
+			//	this->error();
 			res = n1 / n2;
 			break;
 	}
 	numbers.push_back(res);
+}
+
+void	RPN::isuint(std::string str)
+{
+	long long l = atoll(str.c_str());
+	
+	if (l >= 10 || l < -2147483648)
+		this->error();
 }
 
 int		RPN::loop(std::string argv)
@@ -78,11 +88,13 @@ int		RPN::loop(std::string argv)
 		}
 		else
 		{
-			if (i /* + 1 */ == this->lst.size())
+			if (i == this->lst.size())
 					this->error();
+			this->isuint(tmp);
 			for (size_t j = 0; j < tmp.length(); j++)
 				if (!std::isdigit(tmp[j]))
-					this->error();
+					if (!(j == 0 && tmp[j] == '-'))
+						this->error();
 			this->numbers.push_back(atoi(tmp.c_str()));
 		}
 		i++;

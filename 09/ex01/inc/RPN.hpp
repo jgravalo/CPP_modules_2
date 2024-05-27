@@ -23,6 +23,7 @@ class RPN
 		void					operar();
 		std::list<std::string>	ft_split(const std::string &s, char c);
 		int						loop(std::string argv);
+		void					isuint(std::string str);
 };
 
 #endif
