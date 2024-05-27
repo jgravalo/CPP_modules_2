@@ -29,6 +29,7 @@ class PmergeMe
 		void		Ford_Johnson();
 		void		ft_split(const std::string &s, char c);
 		static void	error();
+		void		isuint(std::string str);
 		template <typename T>
 			void		Sort_Merge(T &tmp);
 

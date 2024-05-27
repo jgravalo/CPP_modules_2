@@ -27,6 +27,7 @@ void	PmergeMe::ft_split(const std::string &s, char c)
 
 	while (std::getline(fd, buffer, c))
 	{
+		this->isuint(buffer);
 		for (size_t j = 0; buffer[j]; j++)
 			if (!std::isdigit(buffer[j]))
 				error();
@@ -45,6 +46,14 @@ void	PmergeMe::printTime()
 {
 	std::cout << "Time to process a range of " << this->vecSize << " elements with std::vector : " << this->vec_secs << " us" << std::endl;
 	std::cout << "Time to process a range of " << this->dqueSize << " elements with std::deque : " << this->dque_secs << " us" << std::endl;
+}
+
+void	PmergeMe::isuint(std::string str)
+{
+	long long l = atoll(str.c_str());
+	
+	if (l > 2147483647 || l < -2147483648)
+		this->error();
 }
 
 void	PmergeMe::parse_argv()
@@ -68,6 +77,7 @@ void	PmergeMe::parse_argv()
 		}
 		if (space == 0)
 		{
+			this->isuint(argv[i]);
 			n = atoi(argv[i]);
 			vec.push_back(n);
 			dque.push_back(n);
